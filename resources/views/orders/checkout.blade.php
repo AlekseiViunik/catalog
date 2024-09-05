@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Checkout</title>
+        <title>Корзина</title>
     </head>
     <body>
         @if(session('success'))
@@ -11,27 +11,25 @@
         @endif
         <div style="margin-bottom: 20px;">
             <a href="{{ route('products.index') }}">
-                <button>Back</button>
+                <button>Назад на главную</button>
             </a>
         </div>
-        <h1>Checkout</h1>
-        @if(session('error'))
-            <p>{{ session('error') }}</p>
-        @endif
+        <h1>Корзина</h1>
         @if($cart)
-            <ul>
-                @foreach($cart as $id => $details)
-                    <li>{{ $details['name'] }} - {{ $details['quantity'] }}
-                        - {{ $details['price'] * $details['quantity'] }}</li>
-                @endforeach
-            </ul>
-            <p>Total: {{ $total }}</p>
+            @foreach($cart as $id => $details)
+                <div style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc;">
+                    <p><strong>Наименование:</strong> {{ $details['name'] }}</p>
+                    <p><strong>Количество:</strong> {{ $details['quantity'] }}</p>
+                    <p><strong>Сумма:</strong> {{ $details['price'] * $details['quantity'] }} руб.</p>
+                </div>
+            @endforeach
+            <p><strong>Итого:</strong> {{ $total }} руб.</p>
             <form action="{{ route('order.store') }}" method="POST">
                 @csrf
-                <button type="submit">Place Order</button>
+                <button type="submit">Разместить заказ</button>
             </form>
         @else
-            <p>Your cart is empty!</p>
+            <p>Ваша корзина пуста!</p>
         @endif
     </body>
 </html>
