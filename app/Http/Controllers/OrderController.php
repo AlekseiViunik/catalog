@@ -41,4 +41,12 @@ class OrderController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Order placed successfully!');
     }
+
+    public function destroy($id)
+    {
+        $order = \App\Models\Order::findOrFail($id);
+        $order->delete();
+
+        return redirect()->route('orders.index')->with('success', 'Order deleted successfully!');
+    }
 }
