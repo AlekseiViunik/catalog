@@ -11,22 +11,23 @@
         @endif
         <div style="margin-bottom: 20px;">
             <a href="{{ route('checkout') }}" style="margin-right: 10px;">
-                <button>Cart</button>
+                <button>Корзина</button>
             </a>
             <a href="{{ route('orders.index') }}">
-                <button>Orders</button>
+                <button>Заказы</button>
             </a>
         </div>
-        <h1>Products</h1>
+        <h1>Продукты</h1>
         @foreach($products as $product)
-            <div>
-                <h2>{{ $product->name }}</h2>
-                <p>{{ $product->price }}</p>
+            <div style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc;">
+                <p><strong>Наименование:</strong> {{ $product->name }}</p>
+                <p><strong>Цена:</strong> {{ $product->price }} руб.</p>
                 <form action="{{ route('cart.add') }}" method="POST">
                     @csrf
+                    <label for="quantity{{ $product->id }}"><strong>Количество:</strong></label>
+                    <input type="number" id="quantity{{ $product->id }}" name="quantity" value="1" min="1"> шт.
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <input type="number" name="quantity" value="1" min="1">
-                    <button type="submit">Add to Cart</button>
+                    <button type="submit">В корзину</button>
                 </form>
             </div>
         @endforeach
