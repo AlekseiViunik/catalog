@@ -15,7 +15,11 @@ class OrderController extends Controller
     public function checkout()
     {
         $cart = session()->get('cart', []);
-        $total = array_sum(array_column($cart, 'price'));
+        $total = 0;
+
+        foreach ($cart as $id => $details) {
+            $total += $details['price'] * $details['quantity'];
+        }
 
         return view('orders.checkout', compact('cart', 'total'));
     }
