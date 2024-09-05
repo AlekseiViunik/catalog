@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Products</title>
+        <title>Главная</title>
     </head>
     <body>
         @if(session('success'))
