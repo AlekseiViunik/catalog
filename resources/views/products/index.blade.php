@@ -4,6 +4,20 @@
         <title>Главная</title>
     </head>
     <body>
+        @auth
+            <p>Здравствуйте, {{ Auth::user()->name }}</p>
+            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                @csrf
+                <button type="submit">Выйти</button>
+            </form>
+        @else
+        <a href="{{ route('login') }}">
+            <button>Войти</button>
+        </a>
+        <a href="{{ route('register') }}">
+            <button>Зарегистрироваться</button>
+        </a>
+    @endauth
         @if(session('success'))
             <div>
                 {{ session('success') }}
