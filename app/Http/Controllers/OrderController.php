@@ -28,7 +28,7 @@ class OrderController extends Controller
     {
         $cart = session()->get('cart', []);
         if (empty($cart)) {
-            return redirect()->route('checkout')->with('error', 'Your cart is empty!');
+            return redirect()->route('checkout')->with('error', 'Ваша корзина пуста!');
         }
 
         $order = \App\Models\Order::create();
@@ -39,7 +39,7 @@ class OrderController extends Controller
 
         session()->forget('cart');
 
-        return redirect()->route('products.index')->with('success', 'Order placed successfully!');
+        return redirect()->route('products.index')->with('success', 'Заказ успешно размещен!');
     }
 
     public function destroy($id)
@@ -47,6 +47,6 @@ class OrderController extends Controller
         $order = \App\Models\Order::findOrFail($id);
         $order->delete();
 
-        return redirect()->route('orders.index')->with('success', 'Order deleted successfully!');
+        return redirect()->route('orders.index')->with('success', 'Заказ успешно удален');
     }
 }
