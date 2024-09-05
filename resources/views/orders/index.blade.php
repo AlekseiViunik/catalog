@@ -19,6 +19,11 @@
                     @endforeach
                 </p>
                 <p><strong>Итого:</strong> {{ $order->products->sum(fn($p) => $p->pivot->price * $p->pivot->quantity) }} руб.</p>
+                <form action="{{ route('orders.destroy', $order->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete this order?');">Удалить заказ</button>
+                </form>
             </div>
         @endforeach
     </body>
